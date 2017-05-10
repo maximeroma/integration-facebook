@@ -2,9 +2,24 @@
 <html>
 <head>
 	<title>Personne</title>
+	<meta charset="utf-8">
+	<link rel="stylesheet" href="node_modules/materialize-css/dist/css/materialize.min.css">
+	<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
+	<script src="jquery.min.js">
+		
+	</script>
+	
+	<script src="node_modules/materialize-css/dist/js/materialize.min.js">
+		
+	</script>
+	
+	<script src="app.js">
+		
+	</script>
 </head>
 <body>
-	<form method="get" action="">
+	<form method="post" action="/afficher">
 		<div class="row">
 			<div class="input-field">
 				<label for="nom">Nom</label>
@@ -19,8 +34,16 @@
 				<input type="email" name="email">
 			</div>
 			<div class="input-field">
-				<label for="motDePasse"></label>
+				<label for="motDePasse">mot de passe</label>
 				<input type="text" name="motDePasse">
+			</div>
+			<div class="input-field">
+				<label for="date">date d'anniversaire</label>
+				<input type="text" name="date">
+			</div>
+			<div class="input-field">
+				<label for="genre">genre</label>
+				<input type="text" name="genre">
 			</div>
 			
 		</div>

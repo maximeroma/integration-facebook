@@ -6,7 +6,7 @@ app.listen(3000);
 var expressValidator = require('express-validator');
 var bodyParser = require('body-parser');
 
-//-Middleware
+//--Middleware
 
 app.use(bodyParser.urlencoded({extended : false}));
 app.use(expressValidator());
@@ -17,7 +17,7 @@ app.use(expressValidator());
 function inscriptionServer(req, resp)
 {
 	console.log(req.body);
-	resp.send('ok');
+	resp.send('success');
 }
 
 
@@ -27,4 +27,5 @@ app.use(express.static('public'));
 
 
 app.post('/inscription', inscriptionServer);
+
 

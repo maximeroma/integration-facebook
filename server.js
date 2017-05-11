@@ -6,6 +6,7 @@ app.listen(3000);
 var expressValidator = require('express-validator');
 var bodyParser = require('body-parser');
 var jade = require('jade');
+//var validator = require('validator');
 
 //--Middleware
 

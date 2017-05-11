@@ -6,6 +6,7 @@ $(document).ready(function()
 		validationText(e);
 		validationEmail(e);
 		validationMotDePasse(e);
+		validationGenre(e);
 	});
 
 	// Pour activer les sélects
@@ -13,7 +14,7 @@ $(document).ready(function()
 
 	function validationText(e)
 	{
-		if (!validator.isEmpty($('#prenom').val()) && !validator.isEmpty($('#nom').val())) 
+		if (validator.isLength($('#prenom').val(), {min:2, max: undefined} ) && validator.isLength($('#nom').val(), {min:2, max: undefined})) 
 		{
 			console.log('text passe');
 		}
@@ -43,20 +44,21 @@ $(document).ready(function()
 
 	function validationMotDePasse(e)
 	{
-		if (!validator.isEmpty($('#motDePasse').val()))
+		if (validator.isLength($('#motDePasse').val(), {min:6, max:16}))
 		{
 			console.log('mot de passe passe!');
 		}
 		else 
 		{
 			console.log('preventDefault');
-			e.preventDefault;
+			e.preventDefault();
 		}
 	}
 
 	function validationGenre(e)
 	{
-		if ($('#genre').prop('checked'))
+		console.log($('input:checked').val());
+		if ($('input:checked').val() === 'homme' || $('input:checked').val() === 'femme')
 		{
 			console.log('genre passe');
 		}

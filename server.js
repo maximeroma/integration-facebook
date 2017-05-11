@@ -33,7 +33,7 @@ function afficher(req, resp)
 
 //--Routes
 
-app.use(express.static('public'));
+app.use(express.static(__dirname + '/public'));
 
 
 app.set('views', './views');
@@ -41,9 +41,25 @@ app.set('view engine', 'jade');
 
 app.post('/inscription', function(req, resp)
 {
-	//resp.redirect('http://localhost:3000/personne.html');
-	data = req.body;
-	resp.render('affiche', {nom : data.nom, prenom : data.prenom, email : data.email, motDePasse : data.motDePasse, date : data.jour +'/'+ data.mois +'/'+ data.annee, genre : data.genre }  );
+	req.checkBody('nom', 'Invalid name').notEmpty();
+	req.checkBody('prenom', 'Invalid prenom').notEmpty();
+	req.checkBody('email', 'Invalid email').notEmpty();
+	req.checkBody('motDePasse', 'Invalid mot de passe').notEmpty();
+	req.checkBody('genre', 'Invalid genre').notEmpty();
+	
+	var errors = req.validationErrors();
+	if (errors) 
+	{
+		data = errors;
+		console.log(data);
+		resp.render('error', {errors : data});
+	}
+	else
+	{
+		data = req.body;
+		resp.render('affiche', {nom : data.nom, prenom : data.prenom, email : data.email, motDePasse : data.motDePasse, date : data.jour +'/'+ data.mois +'/'+ data.annee, genre : data.genre });
+	}
+
 
 }); 
 

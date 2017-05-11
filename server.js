@@ -6,25 +6,25 @@ app.listen(3000);
 var expressValidator = require('express-validator');
 var bodyParser = require('body-parser');
 var jade = require('jade');
-//var validator = require('validator');
+var validator = require('validator');
 
 //--Middleware
 
 app.use(bodyParser.urlencoded({extended : false}));
 app.use(expressValidator());
-//app.use(express.static(__dirname + '/public'));
 
-var data;
+
+var data = 
+{
+	nom: "",
+	prenom: "",
+	email: "",
+	motDePasse: "",
+	genre: "",
+}
 
 //--Pages
 
-//function inscriptionServer()
-//{
-//	console.log(req.body);
-//	resp.redirect('http://localhost:3000/personne.html');
-//	data = req.body;
-//	return data;
-//}
 
 function afficher(req, resp)
 {
@@ -42,6 +42,33 @@ app.set('view engine', 'jade');
 
 app.post('/inscription', function(req, resp)
 {
+	if (validator.isLength(req.body.nom, {min:2, max: undefined}))
+	{
+		resp.render('affiche', {nom : req.body.nom});
+	}
+	
+	if (validator.isLength(req.body.prenom, {min:2, max: undefined}))
+	{
+		resp.render('affiche', {prenom: req.body.prenom});
+	}
+	
+	if (validator.isEmail(req.body.email))
+	{
+		resp.render('affiche', {email: req.body.email});
+	}
+	
+	if (validator.isLength(req.body.motDePasse, {min:2, max: undefined}))
+	{
+		resp.render('affiche', {motDePasse: req.body.motDePasse});
+	}
+	
+	if (!validator.isEmpty(req.body.genre))
+	{
+		resp.render('affiche', {genre: req.body.genre})
+	}
+
+
+
 	req.checkBody('nom', 'Invalid name').notEmpty();
 	req.checkBody('prenom', 'Invalid prenom').notEmpty();
 	req.checkBody('email', 'Invalid email').notEmpty();
@@ -58,7 +85,7 @@ app.post('/inscription', function(req, resp)
 	else
 	{
 		data = req.body;
-		resp.render('affiche', {nom : data.nom, prenom : data.prenom, email : data.email, motDePasse : data.motDePasse, date : data.jour +'/'+ data.mois +'/'+ data.annee, genre : data.genre });
+	//	resp.render('affiche', {nom : data.nom, prenom : data.prenom, email : data.email, motDePasse : data.motDePasse, date : data.jour +'/'+ data.mois +'/'+ data.annee, genre : data.genre });
 	}
 
 
